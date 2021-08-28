@@ -108,6 +108,17 @@ export default function App() {
                 </table>
               </div>
             </div>
+            <button
+              type="button"
+              data-html="true"
+              href="#"
+              className="btn btn-add-task"
+              data-toggle="popover"
+              title="Enter task"
+              data-content="<form><input type='text'/></form>"
+            >
+              Add Task
+            </button>
           </div>
         </div>
       </div>
