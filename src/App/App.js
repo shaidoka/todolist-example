@@ -1,8 +1,78 @@
-import React from 'react'
+import React, { Component } from 'react'
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/js/bootstrap.js';
+import {Button,Modal} from 'react-bootstrap'
+import Work from '../component/Work'
+class App extends Component {
+constructor(props){
+  super(props)
+  this.state={
+    IDitem:0,
+    action:1,     //1 là add 2 là edit
+    Inputusername:'',
+    InputWork:'',
+    show:false,
+    ListData:[{id:1,user:'Nguyễn Quang Huy',task:'Lập Trình Hê Thống',status:true,image:1},
+    {id:2,user:'Vita Hort',task:'Công Nghê Phần Mềm',status:false,image:2},
+    {id:3,user:'Nguyễn Bảo Trung',task:'Cơ Sở dữ liêu',status:true,image:3},
+    {id:4,user:'Nguyễn Xuân Quyền ',task:'Lập Trình Nhúng',status:false,image:4}]
+  }
+    this.Addwork = this.Addwork.bind(this);
+    this.UpdateList = this.UpdateList.bind(this);
+    this.CheckWork = this.CheckWork.bind(this);
+    this.EditWork = this.EditWork.bind(this);
+}
+  Addwork() {
+    if(this.state.action==1){
+  this.setState({
+   
+    ListData: [...this.state.ListData, {id:Math.floor(Math.random() * 5000+100),user:this.state.Inputusername,task:this.state.InputWork,status:false,image: Math.floor(Math.random() * 5+1)}]
+  })
+}else{
+  let Obj=this.state.ListData.filter(element=>{return element.id==this.state.IDitem})[0];
+  Obj.user=this.state.Inputusername;
+  Obj.task=this.state.InputWork;
+  this.setState({
+   
+    ListData: [...this.state.ListData.filter(element=>{return element.id!=this.state.IDitem}), Obj]
+  })
+}
+  this.setState({show:false})
+}
+UpdateList(list){
+    this.setState({ListData:list});
+}
+CheckWork(id){
+  console.log(id)
+  let Obj=this.state.ListData.filter(element=>{return element.id==id})[0];
+  Obj.status=true;
+  
+  console.log(Obj)
+  this.setState({
+   ListData: [...this.state.ListData.filter(element=>{return element.id!=id}),Obj]
+  })
+  console.log(this.state.ListData)
+  console.log(this.state.ListData.filter(element=>{return element.id!=id}))
+  console.log(this.state.ListData.filter(element=>{return element.id==id}))
 
-export default function App() {
+ 
+
+}
+EditWork(id){
+  this.setState({action:2})
+  this.setState({show:true})
+  let Obj=this.state.ListData.filter(element=>{return element.id==id})[0];
+  this.setState({InputWork:Obj.task})
+  this.setState({Inputusername:Obj.user,IDitem:id})
+
+}
+
+render(){
   return (
+
+   
     <section className="vh-100 gradient-custom-2">
+      
       <div className="container py-5 h-100">
         <div className="row d-flex justify-content-center align-items-center h-100">
           <div className="col-md-12 col-xl-10">
@@ -15,103 +85,63 @@ export default function App() {
                 <table className="table text-white mb-0">
                   <thead>
                     <tr>
-                      <th scope="col">Team Member</th>
-                      <th scope="col">Task</th>
-                      <th scope="col">Priority</th>
-                      <th scope="col">Actions</th>
+                      <th scope="col">Tên người dùng</th>
+                      <th scope="col">Tên công việc</th>
+                      <th scope="col">Trạng thái</th>
+                      <th scope="col">Hành động</th>
                     </tr>
                   </thead>
+                  
                   <tbody>
-                    <tr className="fw-normal">
-                      <th>
-                        <img src={"https://mdbootstrap.com/img/Photos/new-templates/bootstrap-chat/ava1-bg.png"} alt="avatar 1"
-                          style={{ width: "45px", height: "auto" }} />
-                        <span className="ms-2">Alice Mayer</span>
-                      </th>
-                      <td className="align-middle">
-                        <span >Call Sam For payments</span >
-                      </td>
-                      <td className="align-middle">
-                        <h6 className="mb-0"><span className="badge bg-danger">High priority</span></h6>
-                      </td>
-                      <td className="align-middle">
-                        <a href="#!" data-mdb-toggle="tooltip" title="Done"><i className="fas fa-check fa-lg me-3"></i></a>
-                        <a href="#!" data-mdb-toggle="tooltip" title="Remove"><i className="fas fa-trash-alt fa-lg me-3"></i></a>
-                        <a href="#!" data-mdb-toggle="tooltip" title="Edit"><i className="fas fa-edit fa-lg"></i></a>
-                      </td>
-                    </tr>
-                    <tr className="fw-normal">
-                      <th>
-                        <img src="https://mdbootstrap.com/img/Photos/new-templates/bootstrap-chat/ava2-bg.png" alt="avatar 1"
-                          style={{ width: "45px", height: "auto" }} />
-                        <span className="ms-2">Kate Moss</span>
-                      </th>
-                      <td className="align-middle">Make payment to Bluedart</td>
-                      <td className="align-middle">
-                        <h6 className="mb-0"><span className="badge bg-success">Low priority</span></h6>
-                      </td>
-                      <td className="align-middle">
-                        <a href="#!" data-mdb-toggle="tooltip" title="Done"><i className="fas fa-check fa-lg me-3"></i></a>
-                        <a href="#!" data-mdb-toggle="tooltip" title="Remove"><i className="fas fa-trash-alt fa-lg me-3"></i></a>
-                        <a href="#!" data-mdb-toggle="tooltip" title="Edit"><i className="fas fa-edit fa-lg"></i></a>
-                      </td>
-                    </tr>
-                    <tr className="fw-normal">
-                      <th>
-                        <img src="https://mdbootstrap.com/img/Photos/new-templates/bootstrap-chat/ava3-bg.png" alt="avatar 1"
-                          style={{ width: "45px", height: "auto" }} />
-                        <span className="ms-2">Danny McChain</span>
-                      </th>
-                      <td className="align-middle">Office rent</td>
-                      <td className="align-middle">
-                        <h6 className="mb-0"><span className="badge bg-warning">Middle priority</span></h6>
-                      </td>
-                      <td className="align-middle">
-                        <a href="#!" data-mdb-toggle="tooltip" title="Done"><i className="fas fa-check fa-lg me-3"></i></a>
-                        <a href="#!" data-mdb-toggle="tooltip" title="Remove"><i className="fas fa-trash-alt fa-lg me-3"></i></a>
-                        <a href="#!" data-mdb-toggle="tooltip" title="Edit"><i className="fas fa-edit fa-lg"></i></a>
-                      </td>
-                    </tr>
-                    <tr className="fw-normal">
-                      <th>
-                        <img src="https://mdbootstrap.com/img/Photos/new-templates/bootstrap-chat/ava5-bg.png" alt="avatar 1"
-                          style={{ width: "45px", height: "auto" }} />
-                        <span className="ms-2">Alexa Chung</span>
-                      </th>
-                      <td className="align-middle">Office grocery shopping</td>
-                      <td className="align-middle">
-                        <h6 className="mb-0"><span className="badge bg-danger">High priority</span></h6>
-                      </td>
-                      <td className="align-middle">
-                        <a href="#!" data-mdb-toggle="tooltip" title="Done"><i className="fas fa-check fa-lg me-3"></i></a>
-                        <a href="#!" data-mdb-toggle="tooltip" title="Remove"><i className="fas fa-trash-alt fa-lg me-3"></i></a>
-                        <a href="#!" data-mdb-toggle="tooltip" title="Edit"><i className="fas fa-edit fa-lg"></i></a>
-                      </td>
-                    </tr>
-                    <tr className="fw-normal">
-                      <th className="border-0">
-                        <img src="https://mdbootstrap.com/img/Photos/new-templates/bootstrap-chat/ava6-bg.png" alt="avatar 1"
-                          style={{ width: "45px", height: "auto" }} />
-                        <span className="ms-2">Ben Smith</span>
-                      </th>
-                      <td className="border-0 align-middle">Ask for Lunch to Clients</td>
-                      <td className="border-0 align-middle">
-                        <h6 className="mb-0"><span className="badge bg-success">Low priority</span></h6>
-                      </td>
-                      <td className="border-0 align-middle">
-                        <a href="#!" data-mdb-toggle="tooltip" title="Done"><i className="fas fa-check fa-lg me-3"></i></a>
-                        <a href="#!" data-mdb-toggle="tooltip" title="Remove"><i className="fas fa-trash-alt fa-lg me-3"></i></a>
-                        <a href="#!" data-mdb-toggle="tooltip" title="Edit"><i className="fas fa-edit fa-lg"></i></a>
-                      </td>
-                    </tr>
+                 
+                   <Work List={this.state.ListData} Editchill={this.UpdateList} check={this.CheckWork} UpdateWork={this.EditWork}/>
+                    
                   </tbody>
                 </table>
               </div>
             </div>
           </div>
         </div>
+      <Button style={{position:"relative",marginLeft:"80%"}} onClick={()=>{this.setState({show:true})}}>Thêm công việc</Button>
+      <Modal show={this.state.show}>
+        <Modal.Header style={{fontWeight:500}}>
+          Thêm Công Việc Mới
+        </Modal.Header>
+        <Modal.Body>
+        <form>
+  <div className="form-row">
+    <div className="form-group col-md-12">
+      <label for="inputEmail4">Tên Người Dùng</label>
+      <input type="email" className="form-control" value={this.state.Inputusername} id="username" onChange={(even)=>{this.setState({Inputusername:even.target.value})}} placeholder="Nhâp tên người dùng..."></input>
+    </div>
+   
+ 
+    <div className="form-group col-md-12">
+      <label for="inputZip">Tên Công Việc</label>
+      <input type="text" className="form-control" id="work" value={this.state.InputWork}  onChange={(even)=>{this.setState({InputWork:even.target.value})}} placeholder="Nhâp tên công việc..."></input>
+    </div>
+  </div>
+ 
+</form>
+
+        </Modal.Body>
+        <Modal.Footer>
+        <Button onClick={this.Addwork}>
+         {this.state.action==1?'Thêm':'Chỉnh Sửa'}
+         </Button>
+         <Button onClick={()=>{this.setState({show:false,action:1,Inputusername:'',InputWork:''})}} className="btn btn-secondary">
+          Đóng
+         </Button>
+        </Modal.Footer>
+      </Modal>
+    
+
+
+        
       </div>
+      
     </section>
   )
 }
-
+}
+export default App;
