@@ -66,10 +66,10 @@ class App extends Component {
 
   render() {
     return (
-      <section className="vh-100 gradient-custom-2" >
+      <section className="vh-100 gradient-custom-2" style={{height:(this.state.ListData.length<6)?'750px':'auto'}}>
         <div className="container py-5 h-100">
-          <div className="row d-flex justify-content-center align-items-center h-100" style={{ height: 10000 }}>
-            <div className="col-md-12 col-xl-10" style={{ height: 10000 }}>
+          <div className="row d-flex justify-content-center align-items-center h-100">
+            <div className="col-md-12 col-xl-10">
               <div className="card mask-custom">
                 <div className="card-body p-4 text-white">
                   <div className="text-center pt-3 pb-2">
