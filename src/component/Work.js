@@ -20,7 +20,7 @@ class Work extends Component {
     <span >{todo.task}</span >
   </td>
   <td className="align-middle">
-    <h6 className="mb-0"><span className={(todo.status)?"badge bg-success":"badge bg-danger"}>{(todo.status)?'Hoàn thành':'chưa hoàn thành'}</span></h6>
+    <h6 className="mb-0"><span className={(todo.status)?"badge bg-success":"badge bg-danger"}>{(todo.status)?'Đã hoàn thành':'Chưa hoàn thành'}</span></h6>
   </td>
   <td className="align-middle">
     <a onClick={()=>{this.props.Editchill(this.props.List.filter(elment=>{return elment.id!=todo.id}))}}
