@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 
-
 class Work extends Component {
     constructor(props) {
         super(props);
@@ -33,10 +32,6 @@ class Work extends Component {
   
   ));
   
-
-
-  
 }}
-
 
 export default Work;
