@@ -26,15 +26,21 @@ constructor(props){
     if(this.state.action==1){
   this.setState({
    
-    ListData: [...this.state.ListData, {id:Math.floor(Math.random() * 5000+100),user:this.state.Inputusername,task:this.state.InputWork,status:false,image: Math.floor(Math.random() * 5+1)}]
+    ListData: [...this.state.ListData, {id:Math.floor(Math.random() * 5000+100),user:this.state.Inputusername,task:this.state.InputWork,status:false,image: Math.floor(Math.random() * 5+1)}],
+    InputWork:'',
+    Inputusername:''
   })
 }else{
+  
   let Obj=this.state.ListData.filter(element=>{return element.id==this.state.IDitem})[0];
   Obj.user=this.state.Inputusername;
   Obj.task=this.state.InputWork;
   this.setState({
    
-    ListData: [...this.state.ListData.filter(element=>{return element.id!=this.state.IDitem}), Obj]
+    ListData: [...this.state.ListData.filter(element=>{return element.id!=this.state.IDitem}), Obj],
+    action:1,
+    InputWork:'',
+    Inputusername:''
   })
 }
   this.setState({show:false})
@@ -71,11 +77,11 @@ render(){
   return (
 
    
-    <section className="vh-100 gradient-custom-2">
+    <section className="vh-100 gradient-custom-2" >
       
       <div className="container py-5 h-100">
-        <div className="row d-flex justify-content-center align-items-center h-100">
-          <div className="col-md-12 col-xl-10">
+        <div className="row d-flex justify-content-center align-items-center h-100" style={{height:10000}}>
+          <div className="col-md-12 col-xl-10" style={{height:10000}}>
             <div className="card mask-custom">
               <div className="card-body p-4 text-white">
                 <div className="text-center pt-3 pb-2">
@@ -111,13 +117,13 @@ render(){
         <form>
   <div className="form-row">
     <div className="form-group col-md-12">
-      <label for="inputEmail4">Tên Người Dùng</label>
+      <label >Tên Người Dùng</label>
       <input type="email" className="form-control" value={this.state.Inputusername} id="username" onChange={(even)=>{this.setState({Inputusername:even.target.value})}} placeholder="Nhâp tên người dùng..."></input>
     </div>
    
  
     <div className="form-group col-md-12">
-      <label for="inputZip">Tên Công Việc</label>
+      <label>Tên Công Việc</label>
       <input type="text" className="form-control" id="work" value={this.state.InputWork}  onChange={(even)=>{this.setState({InputWork:even.target.value})}} placeholder="Nhâp tên công việc..."></input>
     </div>
   </div>

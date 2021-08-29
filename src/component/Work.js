@@ -10,7 +10,7 @@ class Work extends Component {
     render(){
   return this.props.List.map((todo,index)=>(
   
-<tr className="fw-normal">
+<tr key={todo.id} className="fw-normal">
   <th>
     <img src={'https://mdbootstrap.com/img/Photos/new-templates/bootstrap-chat/ava'+todo.image+'-bg.png'} alt="avatar 1"
       style={{ width: "45px", height: "auto" }} />
