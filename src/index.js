@@ -5,11 +5,18 @@ import App from './App/App';
 import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './css/styles.css';
+import Project from './Project/Project'
+import { BrowserRouter as Router, Route, Link, NavLink } from "react-router-dom";
 
 
 ReactDOM.render(
   <React.StrictMode >
-    <App />
+    <Router>
+    <div className="App">
+        <Route path="/" exact component={Project} />
+        <Route path='/project/:id'  component={App} />
+    </div>
+</Router>
   </React.StrictMode>,
   document.getElementById('root')
   

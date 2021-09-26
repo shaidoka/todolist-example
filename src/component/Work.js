@@ -1,31 +1,48 @@
 import React, { Component } from 'react';
+import { Row } from 'react-bootstrap';
+import { BrowserRouter as Router, Route, Link, NavLink } from "react-router-dom";
+
 
 class Work extends Component {
   constructor(props) {
     super(props);
+    this.state={
+ 
+
+    }
   }
 
+
+
+
   render() {
+
+      
     return this.props.List.map((todo, index) => (
+    //  <Link to={"/project/"+todo._id}>
       <tr className="fw-normal">
-        <th>
-          <img src={'https://mdbootstrap.com/img/Photos/new-templates/bootstrap-chat/ava' + todo.image + '-bg.png'} alt="avatar 1"
-            style={{ width: "45px", height: "auto" }} />
-          <span className="ms-2">{todo.user}</span>
-        </th>
-        <td className="align-middle">
-          <span >{todo.task}</span >
-        </td>
-        <td className="align-middle">
-          <h6 className="mb-0"><span className={(todo.status) ? "badge bg-success" : "badge bg-danger"}>{(todo.status) ? 'Hoàn thành' : 'Chưa hoàn thành'}</span></h6>
-        </td>
-        <td className="align-middle">
-          <a onClick={() => { this.props.Editchill(this.props.List.filter(elment => { return elment.id != todo.id })) }}
-            href="#!" data-mdb-toggle="tooltip" title="Remove"><i className="fas fa-trash-alt fa-lg me-3"></i></a>
-          <a onClick={() => this.props.UpdateWork(todo.id)} href="#!" data-mdb-toggle="tooltip" title="Edit"><i className="fas fa-edit fa-lg"></i></a>
-          <a onClick={() => this.props.check(todo.id)} style={{ marginLeft: 10 }} hidden={todo.status} href="#!" data-mdb-toggle="tooltip" title="Done"><i className="fas fa-check fa-lg me-3"></i></a>
-        </td>
+       
+       
+      <th scope="row">
+         
+         <span className="ms-2">{todo.name}</span>
+       </th >
+       <td className="align-middle">
+         <span >{todo.createdAt}</span >
+       </td>
+       <td className="align-middle">
+         <span >{todo.todolist.length}</span >
+       </td>
+    
+       <td className="align-middle col-1">
+       <Link to={"/project/"+todo._id}>
+         <h6 className="mb-0"><span style={{backgroundColor:"pink"}} className="badge ">Xem chi tiết</span></h6>
+         </Link>
+       </td>
+       
+    
       </tr>
+    //  </Link>
     ));
   }
 }
